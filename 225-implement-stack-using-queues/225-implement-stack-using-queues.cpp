@@ -7,38 +7,23 @@ public:
     }
     
     void push(int x) {
-        q1.push(x);
+        q2.push(x);
+        while(!q1.empty()){
+            q2.push(q1.front());
+            q1.pop();
+        }
+        swap(q1,q2);
     }
     
     int pop() {
         if(q1.empty()) return -1;
-        while(q1.size()>1){
-            q2.push(q1.front());
-            q1.pop();
-        }
-        int el = q1.front();
+        int el=q1.front();
         q1.pop();
-        while(!q2.empty()){
-            q1.push(q2.front());
-            q2.pop();
-        }
         return el;
     }
     
     int top() {
-        if(q1.empty()) return -1;
-        while(q1.size()>1){
-            q2.push(q1.front());
-            q1.pop();
-        }
-        int el = q1.front();
-        q2.push(el);
-        q1.pop();
-        while(!q2.empty()){
-            q1.push(q2.front());
-            q2.pop();
-        }
-        return el;
+        return q1.front();
     }
     
     bool empty() {
